@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :replies
+  resources :articles
   resources :posts
   devise_for :users, controllers: { registrations: 'users/registrations' }
   get "users/show" => "users#show"

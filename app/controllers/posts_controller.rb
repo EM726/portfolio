@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :login_check, only: [:new, :edit, :update, :destroy]
 
   # GET /posts
   def index
@@ -21,7 +22,7 @@ class PostsController < ApplicationController
 
   # POST /posts
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.new(post_params)
 
     if @post.save
       redirect_to @post, notice: 'Post was successfully created.'
@@ -50,6 +51,8 @@ class PostsController < ApplicationController
     def set_post
       @post = Post.find(params[:id])
     end
+
+    
 
     # Only allow a trusted parameter "white list" through.
     def post_params
