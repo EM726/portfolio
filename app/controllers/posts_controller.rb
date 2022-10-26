@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :login_check, only: [:new, :edit, :update, :destroy]
+  before_action :set_post, only: [ :edit, :update, :destroy]
 
   # GET /posts
   def index
@@ -9,11 +8,12 @@ class PostsController < ApplicationController
 
   # GET /posts/1
   def show
+    @post = Post.find(params[:id])
   end
 
   # GET /posts/new
   def new
-    @post = Post.new
+    @post = current_user.posts.new
   end
 
   # GET /posts/1/edit
@@ -47,9 +47,10 @@ class PostsController < ApplicationController
   end
 
   private
+    
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      @post = Post.find(params[:id])
+      @post = current_user.posts.find(params[:id])
     end
 
     

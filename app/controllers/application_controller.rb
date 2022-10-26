@@ -1,14 +1,10 @@
 class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
 
-    def login_check
-      if current_user.nil?
-        redirect_to root_url, danger: "ログインしてください"
-      end
-    end
+    
 
   # ログイン済ユーザーのみにアクセスを許可する
-  
+  before_action :authenticate_user!
 
   # deviseコントローラーにストロングパラメータを追加する          
   before_action :configure_permitted_parameters, if: :devise_controller?
