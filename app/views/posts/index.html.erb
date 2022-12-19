@@ -1,12 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Posts</h1>
+<h1>投稿一覧</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Content</th>
+      <th>投稿</th>
+      <th>内容</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,10 +16,10 @@
       <tr>
         <td><%= post.title %></td>
         <td><%= post.content %></td>
-        <td><%= link_to 'Show', post %></td>
+        <td><%= link_to '閲覧', post %></td>
         <% if user_signed_in? && current_user.id == post.user_id %>
-          <td><%= link_to 'Edit', edit_post_path(post) %></td>
-          <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to '編集', edit_post_path(post) %></td>
+          <td><%= link_to '消去', post, method: :delete, data: { confirm: '投稿を削除しますか？' } %></td>
         <% end %>
       </tr>
     <% end %>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Post', new_post_path %>
+<%= link_to '投稿する', new_post_path %>
