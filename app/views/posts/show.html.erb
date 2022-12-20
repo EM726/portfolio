@@ -14,17 +14,11 @@
   <div id="comments_area">
     <h2>リプライ</h2>
     <% @comments.each do |comment| %>
-      <% if comment.parent_id.present? || comment.id.blank? %>
-        <% next %>
-      <% end %>
-        <hr>
-        <p>  : <%=comment.content%></p>
-        <p> date : <%=comment.created_at.strftime("%Y-%m-%d %H:%M") %>
-      <div id="reply_area">
-        <% comment.replies.order(:created_at).each do |reply| %>
-        <p>  : <%=reply.content%></p>
+        <% if comment.content.present? %>
+          <hr>
+          <p>  : <%=comment.content%></p>
         <% end %>
-      </div>
+    <% end %>
         <%= form_with(model:[@post,@comment_reply]) do |form| %>
         <div class="row">
           <div class="form-group col-md-6">
@@ -33,12 +27,12 @@
           </div>
         </div>
           <%= form.hidden_field :post_id, value: @post.id %>
-          <%= form.hidden_field :parent_id, value: comment.id%>
+          
         <div class="actions">
           <%= form.submit %>
         </div>
       <% end %>
-    <% end %>
+    
 
     
   </div>
