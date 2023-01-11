@@ -18,6 +18,7 @@
         <td><%= post.user.user_name %></td>
         <td><%= post.title %></td>
         <td><%= post.content %></td>
+        <td><%= image_tag post.post_image.url %>
         <td><%= link_to '閲覧', post %></td>
         <% if user_signed_in? && current_user.id == post.user_id %>
           <td><%= link_to '編集', edit_post_path(post) %></td>
