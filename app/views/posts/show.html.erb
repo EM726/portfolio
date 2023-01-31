@@ -9,10 +9,11 @@
   <strong>内容:</strong>
   <%= @post.content %>
 </p>
-
-<p>
-  <%= image_tag @post.post_image.url %>
-</p>
+<% if @post.post_image.url.present? %>
+  <p>
+    <%= image_tag @post.post_image.url %>
+  </p>
+<% end %>
 
 
   <div id="comments_area">
@@ -32,7 +33,7 @@
         </div>
           <%= form.hidden_field :post_id, value: @post.id %>
           
-        <div class="actions">
+        <div class="action">
           <%= form.submit %>
         </div>
       <% end %>
